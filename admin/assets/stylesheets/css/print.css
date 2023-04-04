@@ -1,0 +1,40 @@
+.gallery-wrap {
+    display: none;
+}
+
+.messagerie{
+	display: none;
+}
+
+.actions{
+	display: none;
+}
+
+#left_nav{
+	display: none;
+	
+}
+
+.page-header{
+	display: none;
+}
+
+.content-header{
+	display: none;
+}
+
+.col-lg-4 {
+	width: 100%
+}
+
+.col-md-6{
+	width: 100%
+}
+
+.left-sidebar{
+	display: none;
+}
+
+.content{
+	margin:10px;
+}

@@ -1,0 +1,46 @@
+.content {
+	padding: 10px;
+	min-height: 100px;
+}
+
+.label_div {
+	width: 120px;
+	float: left;
+	line-height: 28px;
+}
+.input_container {
+
+}
+.input_container input {
+
+}
+.input_container ul {
+	border: 1px solid #eaeaea;
+	position: absolute;
+	z-index: 9;
+	background: #f3f3f3;
+	list-style: none;
+	padding: 10px;
+	 width: 88%;
+}
+.input_container ul li {
+	padding: 2px;
+}
+.input_container ul li:hover {
+	background: #eaeaea;
+	cursor: pointer;
+}
+#stage_list_id {
+	display: none;
+}
+
+#user_list_id {
+	display: none;
+}
+
+b{
+	font-weight: bold;
+	
+}
+
+

@@ -1,0 +1,4 @@
+Les fichier changer:
+    - lang/lang-en.php
+    - Vue/dosier.php
+    
