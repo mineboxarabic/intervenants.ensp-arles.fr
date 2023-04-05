@@ -37,25 +37,39 @@
     <link rel="stylesheet" href="assets/css/costomCss/fichier.css">
 
     <style>
-         .upload_input {
+        .upload_input {
         opacity:0; 
         position: absolute;
         z-index: 1000;
         left:0; 
         top:0;
-        width:100%;
+        width:30%;
         height:100%; 
-
         cursor: pointer;
 
-    }
+
+        }
+        button[disabled], html input[disabled]{
+            cursor: not-allowed;
+        }
+        .disabledx {
+            cursor: not-allowed;
+        }
+
+
     </style>    
 
     
 </head>
 
 <body>
+
 <div class="wrap">
+<div class="background_black">
+<div class="popUp_preview">
+                    
+                    </div>
+</div>
 
     <!-- HEADER -->
           <?php require_once 'Vue/template/inc.header.php'; ?>
@@ -90,6 +104,20 @@
                 </div>
             </div>
             
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <div class="tab-pane" id="files">
                 <h4> Données non complètes </h4>
                 <div class="info__how__to__use">
@@ -103,68 +131,115 @@
 
 
                 <form id="upload-form" action="Controller/upload_file.php" method="POST" enctype="multipart/form-data">
-                <h3>RIB:</h5>
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
-                    </span>
-                    <input id="RIB" type="file" accept="image/*,.pdf" name="RIB" class="upload_input" >
-                    <input id="RIPText" type="text" value="" class="form-control" placeholder="Choose a file...">
-                </div>
-                <h2>SS:</h2>
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
-                    </span>
-                    <input id="SS" type="file" accept="image/*,.pdf" name="SS" class="upload_input" >
-                    <input id="SSText" type="text" value="" class="form-control" placeholder="Choose a file...">
-                </div>
-                <h2>CI:</h2>
+                
+                
+                
+                
+                    <div >
+                    <?php
+                    //get all files of the user from the database
+                    $isExist = $files->existCoIn('RIB', $id_user);
+                    
+                    if($isExist){
+                        $file = $files->getName('RIB');
+                        $hasheName = $files->getHashedName('RIB');
+                        echo'<div class="input-group">
+                        <h5>RIB:</h5>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                            </span>
+                            <input id="RIB" type="file" accept="image/*,.pdf" name="RIB" class="disabledx upload_input" disabled="">
+                            <input id="RIPText" type="text" value="'.$file.'" class="form-control" placeholder="Choose a file..." disabled="">
+                            <button onclick="download(\''.$id_user.'\',\''.$hasheName.'\')" class="download_file btn btn-wide btn-loading btn-primary" type="button"  >Download</button>
+                            <button type="button" onclick="preview(\''.$id_user.'\',\''.$hasheName.'\')" class="preview_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Preview</button>
+                            <button id="delete-RIB-btn" class="delete_FILE btn btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
+                        </div>';
+                    }else{
+                        echo'<div class="input-group">
+                        <h5>RIB:</h5>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                            </span>
+                            <input id="RIB" type="file" accept="image/*,.pdf" name="RIB" class="upload_input" >
+                            <input id="RIPText" type="text" value="" class="form-control" placeholder="Choose a file...">
+                           
+                        </div>';
+                    }
 
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
-                    </span>
-                    <input id="CI" type="file" accept="image/*,.pdf" name="CI" class="upload_input" >
-                    <input id="CIText" type="text" value="" class="form-control" placeholder="Choose a file...">
-                </div>
+                    ?>
 
 
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
-                    </span>
-                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
-                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
-                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
-                    </span>
-                </div>
 
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
-                    </span>
-                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
-                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
-                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
-                    </span>
-                </div>
 
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
-                    </span>
-                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
-                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
-                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
-                    </span>
-                </div>
+                    <?php 
+                    $isExist = $files->existCoIn('SS', $id_user);
+                    if($isExist){
+                        $file = $files->getName('SS');
+                        $hasheName = $files->getHashedName('SS');
+                        echo'<div class="input-group">
+                        <h5>SS:</h5>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                            </span>
+                            <input id="SS" type="file" accept="image/*,.pdf" name="SS" class="disabledx upload_input" disabled="">
+                            <input id="SSText" type="text" value="'.$file.'" class="form-control" placeholder="Choose a file..." disabled="">
+                            <button onclick="download(\''.$id_user.'\',\''.$hasheName.'\')" type="button" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait.." >Download</button>
+                            <button type="button" onclick="preview(\''.$id_user.'\',\''.$hasheName.'\')" class="preview_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Preview</button>
+                            <button id="delete-SS-btn" class="delete_FILE btn btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
+                        </div>';
+                    }else{
+                        echo'<div class="input-group">
+                        <h5>SS:</h5>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                            </span>
+                            <input id="SS" type="file" accept="image/*,.pdf" name="SS" class="upload_input" >
+                            <input id="SSText" type="text" value="" class="form-control" placeholder="Choose a file...">
+                        </div>';
+                    }
+                    ?>
+
+
+                    <?php
+                    $isExist = $files->existCoIn('CI', $id_user);
+                    if($isExist){
+                        $file = $files->getName('CI');
+                        $hasheName = $files->getHashedName('CI');
+                        echo'<div class="input-group">
+                        <h5>CI:</h5>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                            </span>
+                            <input id="CI" type="file" accept="image/*,.pdf" name="CI" class="disabledx upload_input" disabled="">
+                            <input id="CIText" type="text" value="'.$file.'" class="form-control" placeholder="Choose a file..." disabled="">
+                            <button type="button" onclick="download(\''.$id_user.'\',\''.$hasheName.'\')" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait.." >Download</button>
+                            <button type="button" onclick="preview(\''.$id_user.'\',\''.$hasheName.'\')" class="preview_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Preview</button>
+                            <button id ="delete-CI-btn" class="delete_FILE btn btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
+                        </div>';
+                    }else{
+                        echo'<div class="input-group">
+                        <h5>CI:</h5>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                            </span>
+                            <input id="CI" type="file" accept="image/*,.pdf" name="CI" class="upload_input" >
+                            <input id="CIText" type="text" value="" class="form-control" placeholder="Choose a file...">
+                        </div>';
+                    }
+                    ?>
+                    </div>
+                   
+
+
+
 
 
                 <input type="submit" class="btn btn-wide btn-loading btn-primary" data-loading-text="please wait.."/>
                 </form>
+
                 
 </div>
+
 <!--BASIC scripts-->
 <!-- ========================================================= -->
 <script src="assets/js/costomJS/fichier.js"></script>
@@ -204,6 +279,81 @@
 <!--CP and city-->
 <script src="vendor/vicopo/vicopo.min.js"></script>
 <script>
+
+$("#delete-RIB-btn").click(function(){
+    var id_user = <?php echo json_encode($id_user); ?>;
+    let hasheName = <?php echo json_encode($files->getHashedName('RIB')); ?>;
+    console.log('id_user: '+id_user);
+    console.log('hasheName: '+hasheName);
+    $.ajax({
+        url: "Controller/ajax/deleteFile.php",
+        dataType: "text",
+        type: "post",
+        data: {id_user:id_user , hasheName:hasheName, type:"RIB"},
+        success: function(data){
+            toastr.success("RIB supprimé avec succès");
+            if(data == "success"){
+                toastr.success("RIB supprimé avec succès");
+                setTimeout(function(){
+                    location.reload();
+                }, 1000);
+            }else{
+                toastr.error("Une erreur est survenue");
+            }
+        }
+    });
+});
+
+
+$("#delete-CI-btn").click(function(){
+    var id_user = <?php echo json_encode($id_user); ?>;
+    let hasheName = <?php echo json_encode($files->getHashedName('CI')); ?>;
+    console.log('id_user: '+id_user);
+    console.log('hasheName: '+hasheName);
+    $.ajax({
+        url: "Controller/ajax/deleteFile.php",
+        dataType: "text",
+        type: "post",
+        data: {id_user:id_user , hasheName:hasheName, type:"CI"},
+        success: function(data){
+            if(data == "success"){
+                toastr.success("CI supprimé avec succès");
+                setTimeout(function(){
+                    location.reload();
+                }, 1000);
+            }else{
+                toastr.error("Une erreur est survenue");
+            }
+        }
+    });
+});
+
+
+$("#delete-SS-btn").click(function(){
+    var id_user = <?php echo json_encode($id_user); ?>;
+    let hasheName = <?php echo json_encode($files->getHashedName('SS')); ?>;
+    console.log('id_user: '+id_user);
+    console.log('hasheName: '+hasheName);
+    $.ajax({
+        url: "Controller/ajax/deleteFile.php",
+        dataType: "text",
+        type: "post",
+        data: {id_user:id_user , hasheName:hasheName, type:"SS"},
+        success: function(data){
+            if(data == "success"){
+                toastr.success("SS supprimé avec succès");
+                setTimeout(function(){
+                    location.reload();
+                }, 1000);
+            }else{
+                toastr.error("Une erreur est survenue");
+            }
+        }
+    });
+});
+
+
 </script>
+
 </body>
 </html>

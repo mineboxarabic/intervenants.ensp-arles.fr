@@ -120,6 +120,36 @@ class Files {
 		return false;
 	}
 
+	public function getName($type){
+		$ret="";
+		$current_user = $_SESSION['member_id'];
+		$query = "SELECT `real_name` FROM `files` WHERE `id_intervenant`='$current_user' AND `correspondance`='$type' ORDER BY `id` DESC LIMIT 1";
+		if ($stmt = $this->conn->prepare($query)) {
+			
+			$stmt->execute();
+			$stmt->bind_result($ret);
+			$stmt->fetch();
+			$stmt->close();
+		}
+		
+		return $ret;
+	}
+
+	public function getHashedName($type){
+		$ret="";
+		$current_user = $_SESSION['member_id'];
+		$query = "SELECT `name` FROM `files` WHERE `id_intervenant`='$current_user' AND `correspondance`='$type' ORDER BY `id` DESC LIMIT 1";
+		if ($stmt = $this->conn->prepare($query)) {
+			
+			$stmt->execute();
+			$stmt->bind_result($ret);
+			$stmt->fetch();
+			$stmt->close();
+		}
+		
+		return $ret;
+	}
+
 	
 	/**
 	 * Close the connection to the database.

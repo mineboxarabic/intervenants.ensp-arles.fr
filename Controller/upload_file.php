@@ -11,6 +11,7 @@ $maxFileSize = 20 * 1024 * 1024;
 
 $uploadDir = '../upload/';
 $uploadDir = $uploadDir . '/'.$currentUser . '/';
+
 if(!file_exists($uploadDir)) {
     mkdir($uploadDir, 0777, true);
 }
@@ -66,11 +67,29 @@ function checkIfExists($type,$currentUser ,$conn){
     return true;
 }
 
+function renameFile($fileName)
+{
+    $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    //if charactere is not in the chars remove it
+    $fileExtention = pathinfo($fileName, PATHINFO_EXTENSION);
+    $fileName = preg_replace('/[^A-Za-z0-9\-]/', '', $fileName);
+    //if file name is empty return empty string
+    if($fileName == ''){
+        return '';
+    }
+    //if file name is not empty
+    $fileName = str_replace(' ', '_', $fileName);
+    $fileName = str_replace('__', '_', $fileName);
 
+    $fileName = substr($fileName, 0, 20);
+    $fileName = $fileName . '_' . substr(str_shuffle($chars), 0, 5);
+    return $fileName . '.' . $fileExtention;
+
+}
 
 //================ Process RIB File ==================//
 
-
+    $RIBFile['name'] = renameFile($RIBFile['name']);
     //Check if the file was uploaded
     if($RIBFile['name'] != "") {
         // Check if the file was uploaded without errors
@@ -94,8 +113,7 @@ function checkIfExists($type,$currentUser ,$conn){
         $RIBUploadPath = $uploadDir . $RIBUniqueName;
 
 
-
-        if(checkIfExists('RIB',$currentUser ,$conn)){
+        if(!checkIfExists('RIB',$currentUser ,$conn)){
             $sql = "INSERT INTO `files` (`name`, `real_name`, `id_intervenant`,`id_dossier`, `correspondance`) VALUES ('" . $RIBUniqueName . "', '" . $RIBFile['name'] . "', " . $currentUser . ", 23, 'RIB')";
             addToDb($sql, $conn);
         }
@@ -115,7 +133,8 @@ function checkIfExists($type,$currentUser ,$conn){
     }
 
 //=============== Process SS File ==================//
-
+    
+        $SSFile['name'] = renameFile($SSFile['name']);
 // Check if the file was uploaded
     if($SSFile['name'] != "")
     {
@@ -140,7 +159,7 @@ function checkIfExists($type,$currentUser ,$conn){
         $SSUniqueName = uniqid('', true) . '.'.'SS'. '.' . pathinfo($SSFile['name'], PATHINFO_EXTENSION);
         $SSUploadPath = $uploadDir . $SSUniqueName;
 
-        if(checkIfExists('SS',$currentUser ,$conn)){
+        if(!checkIfExists('SS',$currentUser ,$conn)){
             $sql = "INSERT INTO `files` (`name`, `real_name`, `id_intervenant`,`id_dossier`, `correspondance`) VALUES ('" . $SSUniqueName . "', '" . $SSFile['name'] . "', " . $currentUser . ", 23, 'SS')";
             addToDb($sql, $conn);
         }
@@ -164,7 +183,7 @@ function checkIfExists($type,$currentUser ,$conn){
 
 
 //=============== Process CI File ==================//
-
+    $CIFile['name'] = renameFile($CIFile['name']);
 if($CIFile['name'] != "")
 {
     // Check if the file was uploaded without errors
@@ -187,7 +206,7 @@ if($CIFile['name'] != "")
     $CIUploadPath = $uploadDir . $CIUniqueName;
 
 
-    if(checkIfExists('CI',$currentUser ,$conn)){
+    if(!checkIfExists('CI',$currentUser ,$conn)){
         $sql = "INSERT INTO `files` (`name`, `real_name`, `id_intervenant`,`id_dossier`, `correspondance`) VALUES ('" . $CIUniqueName . "', '" . $CIFile['name'] . "', " . $currentUser . ", 23, 'CI')";
         addToDb($sql, $conn);
     }
@@ -207,6 +226,6 @@ if($CIFile['name'] != "")
 
 
 //go to the previous page
-//header("Location: " . $_SERVER["HTTP_REFERER"]);
+header("Location: " . $_SERVER["HTTP_REFERER"]);
 //exit;
 ?>

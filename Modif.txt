@@ -1,4 +1,9 @@
 Les fichier changer:
     - lang/lang-en.php
     - Vue/dosier.php
-    
+    - Vue/fichier MVC
+    - Controller/upload_file.php
+
+j'ai ajoute la posslibite de telecharger un fichier et de lui lier a l'utilisateur connecte
+qui lui donne la posslibite de telecharger une seul fois ces fichier et ca va marcher 
+et il a pa besoin de telecharger ses fichier plusieurs fois.

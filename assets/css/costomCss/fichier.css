@@ -1,3 +1,72 @@
 div{
+
+}
+.input-group .form-control{
+    width: 30%;
+    margin: 0 auto;
+    transition: all 0.5s ease;
+}
+
+.input-group button{
+    
+    margin: 0 2px;
+    width : fit-content;
+    transition: all 0.5s ease;
+}
+.delete_FILE{
+    width:20px;
+}
+h5{
+
+    width: 20px;
+    font-weight: bold;
+}
+.input-group-btn{
+    width: 10%;
+    margin:0;
+    padding:0;
+}
+
+.disabledx{
+    background-color: #ccc;
+    color: #fff;
+    cursor: not-allowed;
+}
+.wrap{
+    position: relative;
+}
+
+@keyframes popupAnim {
+
+    0%{
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100%{
+        opacity: 1;
+        transform: scale(1);
+    }
+    
+}
+.background_black{
+    background-color: rgba(0, 0, 35, 0.405);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: none;
+    z-index: 1000000;
+}
+.popUp_preview{
+    position: absolute;
+    display: none;
+    background-color: rgb(10, 10, 10);
+    width: 80%;
+    height: 70%;
+    /*center the popup in the screen*/
+    top: 10%;
+    left: 10%;
+    animation: popupAnim 0.5s ease;
+    z-index: 100000;
+    transition: all 0.5s ease;
     
 }

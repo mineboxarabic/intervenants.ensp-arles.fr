@@ -447,6 +447,8 @@ class User {
 			return true;
 		}
 	}
+
+	
 	
 	/**
 	 * Close the connection to the database.
@@ -455,5 +457,7 @@ class User {
 		if ($this->conn->close())
 			return true;
 	}
+
+
 }
 ?>
