@@ -34,20 +34,24 @@
     <!--Select with searching & tagging-->
     <link rel="stylesheet" href="vendor/select2/css/select2.min.css">
     <link rel="stylesheet" href="vendor/select2/css/select2-bootstrap.min.css">
-    <link rel="stylesheet" href="../assets/css/costomCss/fichier.css">
+    <link rel="stylesheet" href="assets/css/costomCss/fichier.css">
 
     <style>
          .upload_input {
         opacity:0; 
         position: absolute;
         z-index: 1000;
-        width:calc(100% - 120px);
-        height:100%; 
         left:0; 
-        cursor: pointer;
         top:0;
+        width:100%;
+        height:100%; 
+
+        cursor: pointer;
+
     }
     </style>    
+
+    
 </head>
 
 <body>
@@ -95,74 +99,80 @@
                 </div>
 
 
+
+
+
+                <form id="upload-form" action="Controller/upload_file.php" method="POST" enctype="multipart/form-data">
+                <h3>RIB:</h5>
                 <div class="input-group">
                     <span class="input-group-btn">
-                        <!--<button class="btn btn-default btn-choose" type="button">Choisir</button> -->
-                        <input class="btn btn-default btn-choose" type="file" value="Envoyer"/> 
+                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
                     </span>
-                    <input id="RIB" type="file" accept="image/*,.pdf" name="RIB" class="upload_input" style="display: none;">
-                    <input type="text" value="" class="form-control" placeholder="Choose a file...">
+                    <input id="RIB" type="file" accept="image/*,.pdf" name="RIB" class="upload_input" >
+                    <input id="RIPText" type="text" value="" class="form-control" placeholder="Choose a file...">
+                </div>
+                <h2>SS:</h2>
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                    </span>
+                    <input id="SS" type="file" accept="image/*,.pdf" name="SS" class="upload_input" >
+                    <input id="SSText" type="text" value="" class="form-control" placeholder="Choose a file...">
+                </div>
+                <h2>CI:</h2>
+
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
+                    </span>
+                    <input id="CI" type="file" accept="image/*,.pdf" name="CI" class="upload_input" >
+                    <input id="CIText" type="text" value="" class="form-control" placeholder="Choose a file...">
                 </div>
 
+
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
+                    </span>
+                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
+                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
+                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
+                    </span>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
+                    </span>
+                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
+                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
+                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
+                    </span>
+                </div>
+
+                <div class="input-group">
+                    <span class="input-group-btn">
+                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
+                    </span>
+                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
+                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
+                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
+                    </span>
+                </div>
+
+
+                <input type="submit" class="btn btn-wide btn-loading btn-primary" data-loading-text="please wait.."/>
+                </form>
                 
-
-
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
-                    </span>
-                    <input id="RIB" type="file" accept="image/*,.pdf" name="CI" class="upload_input" style="display: none;">
-                    <input type="text" value="" class="form-control" placeholder="Choose a file...">
-                </div>
-
-
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button class="btn btn-default btn-choose" type="button">Choisir</button>
-                    </span>
-                    <input id="RIB" type="file" accept="image/*,.pdf" name="SS" class="upload_input" style="display: none;">
-                    <input type="text" value="" class="form-control" placeholder="Choose a file...">
-                </div>
-
-
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
-                    </span>
-                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
-                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
-                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
-                    </span>
-                </div>
-
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
-                    </span>
-                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
-                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
-                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
-                    </span>
-                </div>
-
-                <div class="input-group">
-                    <span class="input-group-btn">
-                        <button onclick="download_admin_file('9h5qA9wU1rmpVGj.PNG','Wrong.PNG');" class="download_file btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Download</button>
-                    </span>
-                    <input type="file" accept="image/*,.pdf" name="FILE" class="upload_input" style="display: none;" disabled="">
-                    <input type="text" value="Wrong.PNG" class="form-control" disabled=""> <span class="input-group-btn">
-                        <button onclick="delete_admin_file('9h5qA9wU1rmpVGj.PNG')" class="delete_FILE btn btn-wide btn-loading btn-danger" data-loading-text="please wait.." style="width: min-width;">X</button>
-                    </span>
-                </div>
-
-
-                <button type="button" class="btn btn-wide btn-loading btn-primary" data-loading-text="please wait..">Valider ces données</button>
 </div>
 <!--BASIC scripts-->
 <!-- ========================================================= -->
+<script src="assets/js/costomJS/fichier.js"></script>
 <script src="vendor/jquery/jquery-1.12.3.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
 <script src="vendor/nano-scroller/nano-scroller.js"></script>
+
+
 <!--TEMPLATE scripts-->
 <!-- ========================================================= -->
 <script src="assets/js/template-script.min.js"></script>
@@ -194,29 +204,6 @@
 <!--CP and city-->
 <script src="vendor/vicopo/vicopo.min.js"></script>
 <script>
-/*
-    $(":input").inputmask();
-    document.getElementById("code-cp").addEventListener('keypress', (event) => {
-        document.getElementById("liste-cp").style.display="block";
-        event.stopPropagation();
-    });
-    */
-    
-    $("#phone-number").inputmask("09 99 99 99 99",{ "onincomplete": function(){ document.getElementById("phone-message").style.display='block'; document.getElementById("phone-message-valid").style.display='none'}, "oncomplete": function(){ document.getElementById("phone-message").style.display='none'; document.getElementById("phone-message-valid").style.display='block'} });
-    (function() {
-  'use strict';
-
-  window.addEventListener('load', function() {
-    var form = document.getElementById('needs-validation');
-    form.addEventListener('submit', function(event) {
-      if (form.checkValidity() === false) {
-        event.preventDefault();
-        event.stopPropagation();
-      }
-      form.classList.add('was-validated');
-    }, false);
-  }, false);
-})();
 </script>
 </body>
 </html>
