@@ -25,6 +25,6 @@ if ($stmt = $conn->prepare($sql)) {
     echo "Error : Data update Fail!";
 }
 
-echo "Supprimé !";
+echo "success";
 
 ?>

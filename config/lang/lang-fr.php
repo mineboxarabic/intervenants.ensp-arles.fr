@@ -1,4 +1,10 @@
 <?php
+//Fichier | File
+DEFINE("telecharger","télécharger");
+DEFINE("supprimer","supprimer");
+DEFINE("Apercu", "Aperçu");
+DEFINE("Aucun_fichier", "Aucun fichier");
+DEFINE("INFO_COMMENT_TELECHARGER", "⚠ Les documents se téléversent un par un. <br>1. Cliquer sur \"choisir\" pour sélectionner votre document. <br>2. Cliquer sur envoyer à droite pour le téléverser. <br>");
 
 //LOGIN
 DEFINE( "bienvenue1", "Bienvenue sur la plateforme des intervenants de l'ENSP");
@@ -213,6 +219,8 @@ DEFINE("lm","Lettre d'intention (3 pages maximum en français ou anglais)");
 DEFINE("cv","Curriculum vitae (en français ou anglais)");
 DEFINE("requis","Requis pour votre candidature");
 
+DEFINE('mottest','bonjour tout le monde');
+
 
 
 //MENTORAT //
@@ -293,7 +301,7 @@ DEFINE("years","Années");
 DEFINE("interventions","Interventions");
 DEFINE("archive","Archiver le dossier");
 DEFINE("no_dossier","Pas de dossiers à compléter");
-DEFINE("dossier_to_complete","dossier à compléter");
+DEFINE("dossier_to_complete","il y a des dossiers à compléter");
 DEFINE("dossiers_to_complete","dossiers à compléter");
 DEFINE("soum_folder","Envoyer le dossier");
 

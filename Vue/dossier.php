@@ -98,7 +98,7 @@
             
                     <form style="float:right; display: inline-block; margin-left: 10px;" id="inline-validation" class="form-horizontal" method="post" action="dossier.php?id=<?php echo $id_dossier; ?>">
 	                    &rarr; Après avoir rempli l'intégralité des informations requises, merci d'envoyer le dossier à l'équipe administrative : 
-                        <?php if($button_valid) { ?>
+                        <?php if($button_valid && $Files->allFilesExist()) { ?>
                             <button type="submit" name="valid_dossier" class="btn btn-wide btn-primary"><?php echo soum_folder; ?></button>
                         <?php } else {?>
                             <button type="submit" class="btn btn-wide btn-primary" disabled><?php echo soum_folder; ?></button>
@@ -170,7 +170,7 @@
                                     </div>
 									<?php 
 									}
-                                    if($isProfilComplete)
+                                    if($isProfilComplete && $Files->allFilesExist())
                                     {
                                     ?>
                                     <div class="alert alert-success fade in">
@@ -535,7 +535,7 @@
                             </div>
                             <div class="tab-pane fade" id="datas">
                                     <?php
-                                    if($isDataComplete)
+                                    if($isDataComplete && $Files->allFilesExist())
                                     {
                                     ?>
                                     <div class="alert alert-success fade in">
@@ -649,7 +649,7 @@
                                 
                                 <?php
                                     //if($Files->exist("SS",$id_user,$id_dossier) && $Files->exist("RIB",$id_user,$id_dossier) && $Files->exist("CI",$id_user,$id_dossier) && (($Files->exist("CE",$id_user,$id_dossier) && ($statut_soc=="Salarie du secteur public")) || ($statut_soc!="Salarie du secteur public")) && (($Files->exist("SE",$id_user,$id_dossier) && ($statut_soc=="Sans emploi")) || ($statut_soc!="Sans emploi")))
-                                if($Files->exist("RIB",$id_user,$id_dossier) && $Files->exist("CI",$id_user,$id_dossier) && (($Files->exist("CE",$id_user,$id_dossier) && ($statut_soc=="Salarie du secteur public")) || ($statut_soc!="Salarie du secteur public")) && (($Files->exist("SE",$id_user,$id_dossier) && ($statut_soc=="Sans emploi")) || ($statut_soc!="Sans emploi")))
+                                if($Files->allFilesExist())
 
                                     {
                                     ?>

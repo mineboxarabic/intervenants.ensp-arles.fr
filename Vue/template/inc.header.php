@@ -1,6 +1,9 @@
  <?php 
  require_once "Model/Dossier.php";
+ require_once "Model/Files.php";
+
  $Dossier_head = new Dossier();
+ $files = new Files();
  ?>
  <!-- page HEADER -->
     <!-- ========================================================= -->
@@ -25,12 +28,12 @@
             <!--NOCITE HEADERBOX-->
             <div class="header-section hidden-xs" id="notice-headerbox">
             <?php 
-            if($Dossier_head->haveToComplete($id_user)>1)
-                echo "<span class='badge b-rounded x-success' style='background-color: #88b93c; margin-right: 5px;' ><i class='fa fa-bell'></i> ".$Dossier_head->haveToComplete($id_user)." ".dossiers_to_complete." </span>";
-            else if($Dossier_head->haveToComplete($id_user)==1)
-                echo "<span class='badge b-rounded x-success' style='background-color: #88b93c; margin-right: 5px;'><i class='fa fa-bell'></i> 1 ".dossier_to_complete." </span>";
-            else if($Dossier_head->haveToComplete($id_user)==0)
+            echo "<script>console.log('Lets gooo','".$Dossier_head->areProfilsComplete()."')</script>";
+            if($Dossier_head->areProfilsComplete() && $files->allFilesExist())
                 echo "<span class='badge b-rounded x-success' style='background-color: #88b93c; margin-right: 5px;'><i class='fa fa-check'></i> ".no_dossier." </span>";
+            else
+                echo "<span class='badge b-rounded x-success' style='background-color: #d2322d; margin-right: 5px;' ><i class='fa fa-bell'></i>  ".dossiers_to_complete." </span>";
+            
             ?>
               <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>&lang=fr"><img src="assets/img/fr.png"></a> <a href="<?php echo $_SERVER["REQUEST_URI"]; ?>&lang=en"><img src="assets/img/en.png"></a>
                 <div class="header-separator"></div>

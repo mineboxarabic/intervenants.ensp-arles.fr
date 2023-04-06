@@ -6,11 +6,12 @@ require_once 'Model/User.php';
 require_once 'Model/Dossiers.php';
 require_once 'Model/Ticket.php';
 include_once 'Controller/function.php';
+require_once 'Model/Files.php';
 $Login = new Login();
 $User = new User();
 $Ticket = new Ticket();
 $Dossiers = new Dossiers();
-
+$files = new Files();
 if(isset($_GET['logout'])){$Login->logUserOut();}
 if(!isset($_SESSION['admin']) || !$_SESSION['admin']){header('Location: login.php');exit();}
 /**

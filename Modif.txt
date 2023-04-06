@@ -1,9 +1,34 @@
+Jours de stage:
+    1 - premier jour de stage c'ete pour lire le code et comprendre le fonctionnement
+        du projet.
+    2 - deuxieme jour de stage c'ete commancer a faire des changement dans le code
+        pour ajouter des fonctionnalite (le system de ficher).
+    3 - troisieme jour de stage c'ete pour finire les fonctionnalite demander et faire 
+        aussi un programm qui permet de prendre deux dates avec un periode de la journee
+        et de calculer le nombre de jour qui sont dans cette periode.
+    4 - quatrieme jour de stage c'ete pour finaliser le programme et commanter le code 
+        et traduire les textes en anglais et faire le system d'alerte et le system de notice, et ecrire les changement faitte.
+
 Les fichier changer:
     - lang/lang-en.php
     - Vue/dosier.php
     - Vue/fichier MVC
     - Controller/upload_file.php
+    - Controller/deleteFile.php
+    - Model/Files.php
+    - Model/Dorssier.php 
+    - l'entete
+    - Vue/Home.php
+    - upload/..
+
+les changement que j'ai faitte:
+    - J'ai ajouter une vue qui s'appelle "fichier" qui permet de 
+        visualiser les fichier qui sont lier a un utilisateur.
+
 
 j'ai ajoute la posslibite de telecharger un fichier et de lui lier a l'utilisateur connecte
 qui lui donne la posslibite de telecharger une seul fois ces fichier et ca va marcher 
-et il a pa besoin de telecharger ses fichier plusieurs fois.
+et il a pa besoin de telecharger ses fichier plusieurs fois.  
+
+
+

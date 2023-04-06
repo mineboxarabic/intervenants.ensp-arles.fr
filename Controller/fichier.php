@@ -2,7 +2,10 @@
 
 //start session
 require_once('Model/Files.php');
-require_once('function.php');
+include_once 'Controller/function.php';
+
+
+
 
 $id_user = $_SESSION['member_id'];
 

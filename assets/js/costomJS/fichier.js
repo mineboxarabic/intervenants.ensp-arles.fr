@@ -4,11 +4,12 @@ function main(){
     let RIB = document.getElementById('RIB'); // RIB is a input of file type
     let Ci = document.getElementById('CI');
     let SS = document.getElementById('SS');
+    let Autre = document.getElementById('Autre');
 
     let RIPInputField = document.getElementById('RIPText');
     let CiInputField = document.getElementById('CIText');
     let SSInputField = document.getElementById('SSText');
-
+    let AutreInputField = document.getElementById('AutreText');
 
     RIB.addEventListener('change', function(){
         console.log(RIB.files[0].name);
@@ -26,6 +27,12 @@ function main(){
     SS.addEventListener('change', function(){
         console.log(SS.files[0].name);
         SSInputField.value = SS.files[0].name;
+    }
+    );
+
+    Autre.addEventListener('change', function(){
+        console.log(Autre.files[0].name);
+        AutreInputField.value = Autre.files[0].name;
     }
     );
 }

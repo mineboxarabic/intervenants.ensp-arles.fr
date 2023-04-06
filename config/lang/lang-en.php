@@ -1,4 +1,10 @@
 <?php
+//Fichier | FIle
+DEFINE("telecharger","Download");
+DEFINE("supprimer","Delete");
+DEFINE("Apercu", "Preview");
+DEFINE("Aucun_fichier", "No file");
+DEFINE("INFO_COMMENT_TELECHARGER", "⚠ The documents are uploaded one by one. <br>1. Click on \"choose\" to select your document. <br>2. Click on \"send\" to upload it. <br>");
 //LOGIN
 DEFINE( "bienvenue1", "Welcome to the applications platform for the ENSP");
 DEFINE( "login_master", "Applications for the Masters' Diploma are closed");
@@ -295,7 +301,7 @@ DEFINE("title","Title");
 DEFINE("years","Years");
 DEFINE("archive","Archive the folder");
 DEFINE("no_dossier","No folders to complete");
-DEFINE("dossier_to_complete","folder to complete");
+DEFINE("dossier_to_complete","there are folders to complete");
 DEFINE("dossiers_to_complete","folders to complete");
 DEFINE("soum_folder","Submit the folder");
 // INFO USER ///

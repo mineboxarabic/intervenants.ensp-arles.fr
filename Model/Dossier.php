@@ -130,6 +130,27 @@ class Dossier {
 		return false;
 	}
 
+	public function areProfilsComplete(){
+		$current_user = $_SESSION['member_id'];
+
+		echo "<script>console.log('current_user : $current_user');</script>";
+
+		$sql = "SELECT id FROM `dossier` WHERE `id_intervenant`=$current_user";
+		$stmt = $this->conn->query($sql);
+		if ($stmt) {
+			while($row = $stmt->fetch_assoc()){
+				echo "<script>console.log(".$this->isProfilComplete($row['id']).");</script>";
+				if($this->isProfilComplete($row['id']) == false)
+					return false;
+			}
+			$stmt->close();
+		}
+		else{
+			return false;
+		}
+		return true;
+	}
+
 	/**
 	 * Check if the additionals datas of a folder is complete
 	 * @param int $id ID of the folder

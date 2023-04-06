@@ -43,7 +43,9 @@ class Files {
         return false;
     }
     
-   
+	/**
+	 * Check if a file exist OLD
+	 */
      public function exist($correspondance,$intervenant,$dossier) {
         $sql = "SELECT * FROM `files` WHERE `correspondance`='$correspondance' AND `id_intervenant`='$intervenant' AND `id_dossier`='$dossier'";
         $stmt = $this->conn->query($sql);
@@ -54,6 +56,15 @@ class Files {
         }
         return false;
     }
+	
+
+	/**
+	 * Check if a file exist NEW
+	 * @param string $correspondance the name of the type of the file (ex: RIB)
+	 * @param int $intervenant ID of the intervenant
+	 * @return boolean Say if the file exist
+	 * @deprecated	
+	 */
    
 	public function existCoIn($correspondance, $intervenant){
 		$sql = "SELECT * FROM `files` WHERE `correspondance`='$correspondance' AND `id_intervenant`='$intervenant'";
@@ -120,6 +131,11 @@ class Files {
 		return false;
 	}
 
+	/**
+	 * Getter pour le vrais nom du fichier (ex: RIB.pdf)
+	 * @param string $type le type de fichier (ex: RIB)
+	 * @return string le nom du fichier
+	 */
 	public function getName($type){
 		$ret="";
 		$current_user = $_SESSION['member_id'];
@@ -135,6 +151,13 @@ class Files {
 		return $ret;
 	}
 
+	/**
+	 * Getter pour le nom du fichier (ex: 1_RIB.pdf)
+	 * 
+	 * @param string $type le type de fichier (ex: RIB)
+	 * @return string le nom du fichier
+	 * 
+	 */
 	public function getHashedName($type){
 		$ret="";
 		$current_user = $_SESSION['member_id'];
@@ -150,6 +173,35 @@ class Files {
 		return $ret;
 	}
 
+	/**
+	 * un check pour savoir si tous les fichiers sont présents
+	 * @return boolean
+	 * 
+	 */
+
+	public function allFilesExist(){
+		$types = array('RIB','CI', 'SS');
+		$current_user = $_SESSION['member_id'];
+		foreach($types as $type){
+			if(!$this->existCoIn($type, $current_user))
+				return false;
+		}
+		return true;
+	}
+	public function getAllOtherFiles(){
+		$current_user = $_SESSION['member_id'];
+		$sql = "SELECT * FROM `files` WHERE `id_intervenant`='$current_user' AND `correspondance`='AUTRE' ORDER BY `id` DESC";
+		$names = array();
+		if ($stmt = $this->conn->query($sql)) {
+			while($row = $stmt->fetch_assoc()){
+				$names['names'][] = $row['name'];
+				$names['hashedNames'][] = $row['real_name'];
+			}
+			$stmt->close();
+		}
+		return $names;
+	}
+	
 	
 	/**
 	 * Close the connection to the database.

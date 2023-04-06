@@ -1,8 +1,47 @@
 div{
 
 }
+.hl{
+    background-color: #ccc;
+    color: #fff;
+    width: 100%;    
+    height: 1px;
+}
+.input-group-input{
+
+    display: flex;
+
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+    width: 100%;
+}
+.input-group{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    width: 50%;
+
+    transition: all 0.5s ease;
+}
+.input-group-file-existe{
+    width: 74%;
+}
+input[type="submit"]{
+    margin: 0 auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    transition: all 0.5s ease;
+    margin-left: 20%;
+
+}
+
 .input-group .form-control{
-    width: 30%;
+    width: 100%;
     margin: 0 auto;
     transition: all 0.5s ease;
 }
@@ -18,13 +57,12 @@ div{
 }
 h5{
 
-    width: 20px;
+    width: 10%;
     font-weight: bold;
+    text-align: center;
 }
 .input-group-btn{
-    width: 10%;
-    margin:0;
-    padding:0;
+    width: 15%;
 }
 
 .disabledx{

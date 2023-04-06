@@ -4,11 +4,11 @@ include_once 'Controller/function.php';
 require_once 'Model/Login.php';
 require_once 'Model/User.php';
 require_once 'Model/Dossier.php';
-
+require_once('Model/Files.php');
 $Login = new Login();
 $User = new User();
 $Dossier = new Dossier();
-
+$files = new Files();
 if(isset($_GET['logout'])){$Login->logUserOut();}
 if(!isset($_SESSION['admin']) || $_SESSION['admin']){header('Location: login.php');exit();}
 /**

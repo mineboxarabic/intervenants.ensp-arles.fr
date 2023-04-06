@@ -3,9 +3,9 @@ session_start();
 require('../config/config.php');
 $conn = new mysqli(DB_HOST,DB_USER,DB_PASS,DB_NAME);
 $currentUser = $_SESSION['member_id'];
-$RIBFile = $_FILES['RIB'];
-$SSFile = $_FILES['SS'];
-$CIFile = $_FILES['CI'];
+
+
+
 
 $maxFileSize = 20 * 1024 * 1024; 
 
@@ -88,10 +88,14 @@ function renameFile($fileName)
 }
 
 //================ Process RIB File ==================//
-
-    $RIBFile['name'] = renameFile($RIBFile['name']);
+$RIBFile = array();
+if(isset($_FILES['RIB']['name']) && !empty($_FILES['RIB']['name'])) {
+    $RIBFile = $_FILES['RIB'];
+}
     //Check if the file was uploaded
-    if($RIBFile['name'] != "") {
+
+    if(!empty($RIBFile)) {
+        $RIBFile['name'] = renameFile($RIBFile['name']);
         // Check if the file was uploaded without errors
         if($RIBFile['error'] == 1) {
             echo "Please upload a RIB file.";
@@ -109,9 +113,10 @@ function renameFile($fileName)
             echo "RIB File size exceeds limit. Please upload a file smaller than 20 MB.";
             exit;
         }
+
         $RIBUniqueName = uniqid('', true) . '.'.'RIB'. '.' . pathinfo($RIBFile['name'], PATHINFO_EXTENSION);
         $RIBUploadPath = $uploadDir . $RIBUniqueName;
-
+        
 
         if(!checkIfExists('RIB',$currentUser ,$conn)){
             $sql = "INSERT INTO `files` (`name`, `real_name`, `id_intervenant`,`id_dossier`, `correspondance`) VALUES ('" . $RIBUniqueName . "', '" . $RIBFile['name'] . "', " . $currentUser . ", 23, 'RIB')";
@@ -121,23 +126,29 @@ function renameFile($fileName)
 
         //loop through all files in the directory to check if there is a RIB file
         $files = scandir($uploadDir);
+        var_dump($files);
         foreach ($files as $file) {
           if ($file !== '.' && $file !== '..') {
             if(getDocType($file) == 'RIB'){
+                echo getDocType($file);
                 unlink($uploadDir.$file); //if there is a RIB file delete it
-                move_uploaded_file($RIBFile['tmp_name'], $RIBUploadPath); //upload the new RIB file
-            }else{
-                move_uploaded_file($RIBFile['tmp_name'], $RIBUploadPath);} //otherwise upload the new RIB file
-          }
+            }
         }
     }
+    move_uploaded_file($RIBFile['tmp_name'], $RIBUploadPath);}
 
 //=============== Process SS File ==================//
     
-        $SSFile['name'] = renameFile($SSFile['name']);
+        
 // Check if the file was uploaded
-    if($SSFile['name'] != "")
+$SSFile = array();
+if(isset($_FILES['SS']['name']) && !empty($_FILES['SS']['name'])) {
+    $SSFile = $_FILES['SS'];
+}
+
+    if(!empty($SSFile))
     {
+        $SSFile['name'] = renameFile($SSFile['name']);
         // Check if the file was uploaded without errors
         if($SSFile['error'] == 1) {
             echo "Please upload a numero de securite social file.";
@@ -183,9 +194,14 @@ function renameFile($fileName)
 
 
 //=============== Process CI File ==================//
-    $CIFile['name'] = renameFile($CIFile['name']);
-if($CIFile['name'] != "")
+    $CIFile = array();
+if(isset($_FILES['CI']['name']) && !empty($_FILES['CI']['name'])) {
+    $CIFile = $_FILES['CI'];
+}
+
+if(!empty($CIFile))
 {
+    $CIFile['name'] = renameFile($CIFile['name']);
     // Check if the file was uploaded without errors
     if($CIFile['error'] == 1) {
         echo "Please upload a Cart d'identite file.";
@@ -224,8 +240,53 @@ if($CIFile['name'] != "")
     }
 }
 
+//====================== Process Autre File ==================//
+$AutreFile = array();
+if(isset($_FILES['Autre']['name']) && !empty($_FILES['Autre']['name'])) {
+    $AutreFile = $_FILES['Autre'];
+}
+
+if(!empty($AutreFile))
+{
+    $AutreFile['name'] = renameFile($AutreFile['name']);
+    // Check if the file was uploaded without errors
+    if($AutreFile['error'] == 1) {
+        echo "There was an error uploading your document file.";
+        exit;
+    }
+    // Check if the file has a valid extension
+    if(!checkExtension($AutreFile)) {
+        echo "Invalid document file type. Please upload a JPG, JPEG, PNG, GIF, or PDF file.";
+        exit;
+    }
+    // Check if the file is not too big
+    if(checkFileSize($AutreFile) == false) {
+        echo "document File size exceeds limit. Please upload a file smaller than 20 MB.";
+        exit;
+    }
+
+    $AutreUniqueName = uniqid('', true) . '.'.'Autre'. '.' . pathinfo($AutreFile['name'], PATHINFO_EXTENSION);
+    $AutreUploadPath = $uploadDir . $AutreUniqueName;
+
+    
+    $sql = "INSERT INTO `files` (`name`, `real_name`, `id_intervenant`,`id_dossier`, `correspondance`) VALUES ('" . $AutreUniqueName . "', '" . $AutreFile['name'] . "', " . $currentUser . ", 23, 'Autre')";
+    addToDb($sql, $conn);
+    
+
+    //loop through all files in the directory to check if there is a Autre file
+    $files = scandir($uploadDir);
+    foreach ($files as $file) {
+      if ($file !== '.' && $file !== '..') {
+        if(getDocType($file) == 'Autre'){
+            unlink($uploadDir.$file); //if there is a Autre file delete it
+            move_uploaded_file($AutreFile['tmp_name'], $AutreUploadPath); //upload the new Autre file
+        }else{
+            move_uploaded_file($AutreFile['tmp_name'], $AutreUploadPath);} //otherwise upload the new Autre file
+      }
+    }
+}
 
 //go to the previous page
-header("Location: " . $_SERVER["HTTP_REFERER"]);
+//header("Location: " . $_SERVER["HTTP_REFERER"]);
 //exit;
 ?>

@@ -108,14 +108,14 @@
                         </div>
                     </div>
                     <?php
-                    if($User->hasCompleteProfil($id_user)) {
+                    if($Dossier->areProfilsComplete() && $files->allFilesExist()) {
                         ?>
                         <div class="col-sm-5 col-md-4 col-lg-4">
                             <div class="panel widgetbox wbox-2 bg-success color-w">
                                 <a href="profil.php">
                                     <div class="panel-content">
                                         <div class="row">
-                                            <div class="col-xs-4">
+                                            <div class="col-xs-4">s
                                                 <span class="icon fa fa-bell color-w"></span>
                                             </div>
                                             <div class="col-xs-8">
@@ -154,12 +154,11 @@
                                 <div class="panel-content">
                                     <h1 class="title color-light-1"> <i class="fa fa-envelope"></i>
                                         <?php 
-                                        if($Dossier->haveToComplete($id_user)>1)
-                                            echo $Dossier->haveToComplete($id_user)."</h1><h4 class='subtitle'>".dossiers_to_complete."</h4>";
-                                        else if($Dossier->haveToComplete($id_user)==1)
-                                            echo $Dossier->haveToComplete($id_user)."</h1><h4 class='subtitle'>".dossier_to_complete."</h4>";
-                                        else if($Dossier->haveToComplete($id_user)==0)
+                                        if($Dossier->areProfilsComplete() && $files->allFilesExist())
                                             echo no_dossier."</h1>";
+                                        else
+                                            echo dossier_to_complete ."</h1>";
+
                                         ?>
                                 </div>
                             </a>
