@@ -182,12 +182,12 @@ if(isset($_FILES['SS']['name']) && !empty($_FILES['SS']['name'])) {
             if(getDocType($file) == 'SS'){
                 unlink($uploadDir.$file); //if there is a SS file delete it
                 move_uploaded_file($SSFile['tmp_name'], $SSUploadPath); //upload the new SS file
-            }else{
-                move_uploaded_file($SSFile['tmp_name'], $SSUploadPath);} //otherwise upload the new SS file
-          }
+            }
         }
 
+
     }
+    move_uploaded_file($SSFile['tmp_name'], $SSUploadPath);}
 
 
 
@@ -234,11 +234,11 @@ if(!empty($CIFile))
         if(getDocType($file) == 'CI'){
             unlink($uploadDir.$file); //if there is a CI file delete it
             move_uploaded_file($CIFile['tmp_name'], $CIUploadPath); //upload the new CI file
-        }else{
-            move_uploaded_file($CIFile['tmp_name'], $CIUploadPath);} //otherwise upload the new CI file
-      }
+        }
     }
+
 }
+move_uploaded_file($CIFile['tmp_name'], $CIUploadPath);}
 
 //====================== Process Autre File ==================//
 $AutreFile = array();
@@ -280,11 +280,10 @@ if(!empty($AutreFile))
         if(getDocType($file) == 'Autre'){
             unlink($uploadDir.$file); //if there is a Autre file delete it
             move_uploaded_file($AutreFile['tmp_name'], $AutreUploadPath); //upload the new Autre file
-        }else{
-            move_uploaded_file($AutreFile['tmp_name'], $AutreUploadPath);} //otherwise upload the new Autre file
-      }
+        }
     }
 }
+move_uploaded_file($AutreFile['tmp_name'], $AutreUploadPath);} //otherwise upload the new Autre file
 
 //go to the previous page
 //header("Location: " . $_SERVER["HTTP_REFERER"]);
